@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CSCE Template</title>
+
+<script type="text/javascript" src="./canvas/canvas.js"></script>
+<link href="./canvas/canvas.css" rel="stylesheet" type="text/css"></link>
+
+<script type="text/javascript" src="./jukeBox/jukeBox.js"></script>
+<link href="./jukeBox/jukeBox.css" rel="stylesheet" type="text/css"></link>
+
+<script type="text/javascript" src="./database/database.js"></script>
+
+<script type="text/javascript" src="./musicGraph/musicGraph.js"></script>
+
+</head>
+
+<body>
+
+
+<script>
+//Modify this to call whatever function you want
+var MyObject= {};
+MyObject.myFunction = function(value){
+	var newText = document.createElement('p');
+	var t = document.createTextNode(value);
+	newText.appendChild(t);
+	var newDiv = document.createElement('div');
+	newDiv.appendChild(newText);
+	document.body.appendChild(newDiv);
+}
+
+function callback(){
+	//If key = enter
+	if(event.keyCode == 13){
+		//target is where the even came from
+		var target = event.target;
+		var value = target.value;
+		MyObject.myFunction(value);
+	}
+		
+
+}
+</script>
+<h3>Type in here and press enter: </h3>
+<input type="text" id="input1" onkeydown="callback()"></input>
+
+</body>
+</html>
