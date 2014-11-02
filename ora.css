@@ -1,0 +1,23 @@
+.draggable {
+	 width: 90px;
+	 height: 90px;
+	 padding: 0.5em;
+	 float: left;
+	 margin: 0 10px 10px 0;
+ }
+#containment-wrapper {
+	 width: 400px;
+	 height:400px;
+	 border:2px solid #ccc;
+	 padding: 10px;
+	 display: inline-block;
+	 margin-left:10px 
+ }
+#jukeBox {
+	 width: 200px;
+	 height:400px; 
+	 border:2px solid #ccc; 
+	 padding: 10px; 
+	 display: inline-block; 
+	 float: left;
+ }
