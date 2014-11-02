@@ -1,0 +1,55 @@
+.leftColumn{
+	width: 266px;
+	height: 632px;
+	background-color: lightgray;
+	display: inline-block;
+	float: left;
+	border: 2px;
+	border-style: solid;
+	border-color: gray;
+	}
+.rightColumn{
+	width: 790px;
+	height: 630px;
+	display: inline-block;
+	border: 2px 2px 2px 0px;
+	border-style: solid;
+	border-color: gray;
+	background-image: url(images/linen.jpg);
+}
+.album{
+width: 120px;
+height: 120px;
+margin: 4px 4px 8px 4px;
+display: inline-block;
+font-family: calibri;
+
+}
+
+.canvasImg{
+border: 4px;
+	border-style: solid;
+	border-color: white;
+	border-radius: 8px;
+}
+.jukeBoxIn{
+	margin-left: 4px;
+	margin-top: 4px;
+	float: center;
+}
+.musicLabel{
+width: 119px;
+float: center;
+}
+.playback{
+width: 80px;
+height: 80px;
+}
+img{
+width: 120px;
+height:  120px;
+margin-top: 4px;
+}
+svg{
+position: absolute;
+}
