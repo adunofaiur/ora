@@ -13,6 +13,7 @@ function Music(songName, pathToFile, pathToArtwork){
 	this.pathToArtwork = pathToArtwork;
 } 
 var Map = {};
+Map.values = [];
 //Courtesy of stack overflow:
 //http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript user 
 //Briguy37
@@ -27,13 +28,13 @@ function generateUUID(){
 };
 Map.add = function(musicObject){
 	var id = generateUUID();
-	Map[id] = musicObject;
+	Map.values[id] = musicObject;
 
 }
 
 Map.get = function(uniqueID){
-	if(Map[uniqueID] != null{
-		return Map[uniqueID];
+	if(Map.values[uniqueID] != null){
+		return Map.values[uniqueID];
 	)else{
 		alert("No song for ID");
 	}
@@ -42,5 +43,11 @@ Map.get = function(uniqueID){
 
 var Database = {};
 Database.initialize = function(){
+Music Color_Kings =new Music("Color_Kings","database\Color_Kings.mp3"," ");
+Music Kirk_Pearson=new Music("Kirk_Pearson","database\Kirk_Pearson"," ");
+Music These_Guy=new Music("These_Guy","database\These_Guy"," ");
+Map.add(Color_Kings);
+Map.add(Kirk_Pearson);
+Map.add(These_Guy);
 	
 }
