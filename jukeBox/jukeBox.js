@@ -10,7 +10,7 @@ JukeBox.initialize = function(){
 $( "#someMusic" ).draggable({ revert: "invalid" });
 }
 //Make your own parameters, I'm not sure how you want to handle the control flow
-JukeBox.addMusic(){
+JukeBox.addMusic = function() {
 
 //Whenever you make music HTML, it needs to be
 //initialized

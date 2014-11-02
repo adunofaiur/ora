@@ -6,6 +6,6 @@
  */
 //A global variable. Be careful not to overwrite other global variables!
 var Graph = {};
-MusicGraph.initialize = function(){
+Graph.initialize = function(){
 	
 }

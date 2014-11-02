@@ -7,12 +7,12 @@
 
 var Canvas = {};
 Canvas.initialize = function(){
-	( "#draggable3" ).draggable({ containment: "#musicCanvas", scroll: false });
+	$( "#draggable3" ).draggable({ containment: "#musicCanvas", scroll: false });
 	$( "#musicCanvas" ).droppable({
      
       drop: function( event, ui ) {
-        $(ui.d).draggable({ containment: "#containment-wrapper", scroll: false });
-          
+        $(ui.draggable).draggable({ containment: "#containment-wrapper", scroll: false });
+		//JukeBox.readd(ui.draggable);
       }
     });
 
