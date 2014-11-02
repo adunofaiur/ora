@@ -6,7 +6,17 @@
  */
 
 var Canvas = {};
-Canvas.someFunction = function(someArg, anotherArg){
-	var someValue = 0;
-	return someValue;
+Canvas.initialize = function(){
+	( "#draggable3" ).draggable({ containment: "#musicCanvas", scroll: false });
+	$( "#musicCanvas" ).droppable({
+     
+      drop: function( event, ui ) {
+        $(ui.d).draggable({ containment: "#containment-wrapper", scroll: false });
+          
+      }
+    });
+
+}
+//Expects a drop event
+Canvas.newMusicDrop = function(e){
 }
