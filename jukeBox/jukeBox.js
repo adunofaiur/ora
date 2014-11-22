@@ -10,11 +10,24 @@ JukeBox.initialize = function(){
 $( "#someMusic" ).draggable({ revert: "invalid" });
 }
 //Make your own parameters, I'm not sure how you want to handle the control flow
-JukeBox.addMusic = function() {
+JukeBox.addMusic = function(uuid) {
 
-//Whenever you make music HTML, it needs to be
-//initialized
-//	$( "#someMusic" ).draggable({ revert: "invalid" });
+//DO NOT CHANGE
+	var mData = Database.values.get(uuid);
+	var jukeboxMusic = document.createElement("div");
+	jukeboxMusic.className = "jukeboxMusic";
+	var jukeboxImage = document.createElement("img");
+	jukeboxImage.className = "jukeboxImage";
+	jukeboxImage.setAttribute("src", mData.pathToArtwork);
+	jukeboxMusic.setAttribute("musicId", uuid);
+	jukeboxMusic.appendChild(jukeboxImage);
+	$( jukeboxMusic).draggable({ revert: "invalid" });
+		jukeboxMusic.classList.add("jukeboxMusic");
+//NOW YOU CAN CHANGE		
+		
+	var jb = document.getElementById("jukeBox");
+	jb.appendChild(jukeboxMusic);
+	
 
 }
 

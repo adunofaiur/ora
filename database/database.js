@@ -165,9 +165,9 @@ var Database = {};
 Database.values = new Map();
 Database.initialize = function(){
 	
-	var Color_Kings = new Music("Color_Kings","database\Color_Kings.mp3"," ");
-	var Kirk_Pearson = new Music("Kirk_Pearson","database\Kirk_Pearson.mp3"," ");
-	var These_Guy = new Music("These_Guy","database\These_Guy.mp3"," ");
+	var Color_Kings = new Music("Color_Kings","database/Color_Kings.mp3","database/album3.jpg");
+	var Kirk_Pearson = new Music("Kirk_Pearson","database/Kirk_Pearson.mp3","database/album4.jpg");
+	var These_Guy = new Music("These_Guy","database/These_Guy.mp3","database/album5.jpg");
 	
 	Database.values.put(generateUUID(), Color_Kings);
 	Database.values.put(generateUUID(), Kirk_Pearson);
