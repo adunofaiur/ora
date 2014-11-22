@@ -18,11 +18,71 @@ function Node(uid, xPosition, yPosition, html2323){
 
 var Graph = {};
 Graph.nodes = [];
+Graph.currentNode;
 
 Graph.initialize = function(){
 	
 }
+Graph.play = function(musicId){
+	Graph.currentNode = Graph.nodeById(musicId);
 
+	var control = document.getElementById("mainControl");
+	while(control.childNodes.length>0){
+		control.removeChild(control.firstChild);
+	}
+	var source = document.createElement("source");
+	source.setAttribute("src", Database.values.get(musicId).pathToFile);
+	source.setAttribute("type", "audio/mpeg");
+	control.appendChild(source);
+	control.addEventListener('ended', function(event){
+		if(Graph.currentNode.outEdges.length > 0){
+			var nextSong = Graph.getNextSong(Graph.currentNode.uid);
+			Graph.play(nextSong.uid);
+		}
+	
+		
+		});
+	
+}
+
+
+Graph.play = function(id){
+	Graph.currentNode = Graph.nodeById(id);
+	var control = document.getElementById("mainControl");
+	var source = document.createElement("source");
+	
+	while(control.childNodes.length>0){
+		control.removeChild(control.firstChild);
+	}
+	source.setAttribute("src", Database.values.get(Graph.currentNode.uid).pathToFile);
+	source.setAttribute("type", "audio/mpeg");
+	control.appendChild(source);
+	var nextSongCheck;
+	if(Graph.currentNode.outEdges.length > 0){
+		nextSongCheck = true;
+		var nextSong = Graph.getNextSong(Graph.currentNode.uid);
+		control.addEventListener('ended', function(event){
+		Graph.play(nextSong.uid);
+	});
+	}
+	else{
+		control.addEventListener('ended', function(event){
+		event.target.pause();
+	});
+	}
+		control.load();
+		control.play();
+
+}
+
+
+Graph.nodeById = function(id){
+	for (var i = 0; i < this.nodes.length; i++){
+		if(this.nodes[i].uid == id){
+			return this.nodes[i];
+		}
+	}
+}
 Graph.addNode = function(node) {
 	Graph.nodes.push(node);
 }
@@ -94,4 +154,12 @@ Graph.removeEdge = function(startUid, endUid) {
 			}			
 		}
 	}		
+}
+
+Graph.getNextSong = function(id){
+	var possibleNodes = Graph.nodeById(id).outEdges;
+	
+	var index = Math.floor((Math.random() * possibleNodes.length));
+	return possibleNodes[index];
+
 }

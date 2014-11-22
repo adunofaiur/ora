@@ -7,7 +7,6 @@
 
 var JukeBox = {};
 JukeBox.initialize = function(){
-$( "#someMusic" ).draggable({ revert: "invalid" });
 }
 //Make your own parameters, I'm not sure how you want to handle the control flow
 JukeBox.addMusic = function(uuid) {

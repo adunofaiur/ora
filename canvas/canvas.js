@@ -189,11 +189,5 @@ Canvas.redraw = function(){
 }
 
 Canvas.playMe = function(id){
-	var control = document.getElementById("mainControl");
-	var source = document.createElement("source");
-	source.setAttribute("src", Database.values.get(id).pathToFile);
-	source.setAttribute("type", "audio/mpeg");
-	
-	control.appendChild(source);
-	control.play()
+	Graph.play(id);
 }
