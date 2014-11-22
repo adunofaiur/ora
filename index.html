@@ -56,15 +56,15 @@ function callback(){
 </script>
 
 <div id="jukeBox">
-	<div id="someMusic" class="draggable ui-widget-content">
-		<p>Thriller</p>
-	</div>
+	
 </div>
 <div id="musicCanvas">
-  <div id="draggable3" class="draggable ui-widget-content">
-    <p>I'm contained within the box</p>
-  </div>
+<canvas id="draw" width="790px" height="630px"></canvas>
  </div>
+ 
+ <audio controls id="mainControl">
+Your browser does not support the audio element.
+</audio>
  <script>
 
 	Database.initialize();

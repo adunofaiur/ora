@@ -169,9 +169,9 @@ Database.initialize = function(){
 	var Kirk_Pearson = new Music("Kirk_Pearson","database/Kirk_Pearson.mp3","database/album4.jpg");
 	var These_Guy = new Music("These_Guy","database/These_Guy.mp3","database/album5.jpg");
 	
-	Database.values.put(generateUUID(), Color_Kings);
-	Database.values.put(generateUUID(), Kirk_Pearson);
-	Database.values.put(generateUUID(), These_Guy);
+	Database.values.put("test1", Color_Kings);
+	Database.values.put("test2", Kirk_Pearson);
+	Database.values.put("test3", These_Guy);
 	JukeBox.initialize();
 	
 }

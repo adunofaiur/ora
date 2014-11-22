@@ -1,10 +1,36 @@
-.canvasContainer{
+#musicCanvas{
 	font-family: "Calibri"
+	display: inline-block;
+	width: 790px;
+	height: 630px;
+	display: inline-block;
+	border: 2px 2px 2px 0px;
+	border-style: solid;
+	border-color: gray;
+	background-image: url(linen.jpg);
 }
 
+#jukeBox{
+	width: 266px;
+	height: 643px;
+	background-color: lightgray;
+	display: inline-block;
+	float: left;
+	border: 2px;
+	border-style: solid;
+	border-color: gray;
+	}
 .canvasMusic{
 border: 4px;
 	border-style: solid;
 	border-color: white;
 	border-radius: 8px;
+	max-height: 128px;
+}
+.canvasMusicSelected{
+border: 4px;
+	border-style: solid;
+	border-color: red;
+	border-radius: 8px;
+	max-height: 128px;
 }
