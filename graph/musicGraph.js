@@ -19,6 +19,7 @@ function Node(uid, xPosition, yPosition, html2323){
 var Graph = {};
 Graph.nodes = [];
 Graph.currentNode;
+Graph.mood;
 
 Graph.initialize = function(){
 	

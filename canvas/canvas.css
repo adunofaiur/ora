@@ -13,7 +13,7 @@
 #jukeBox{
 	width: 266px;
 	height: 643px;
-	background-color: #3399FF
+	background-color: lightgray;
 ;
 	display: inline-block;
 	float: left;
@@ -40,8 +40,21 @@ border: 4px;
 .canvasMusicPlaying{
 border: 4px;
 	border-style: solid;
-	border-color: lightblue;
+	border-color: #3399FF;
 	border-radius: 8px;
 	max-height: 128px;
 	 box-shadow:         1px 1px 8px 0px black; 
+}
+.moodBox{
+	display: inline-block;
+}
+.mood{
+	height: 200px;
+	width: 200px;
+	background: blue;
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+	display: block;
+
 }
