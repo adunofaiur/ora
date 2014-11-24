@@ -51,6 +51,10 @@ Canvas.initialize = function(){
 			$(ui2).mouseup(function(event){
 				Canvas.redraw();
 				});
+			$(ui2).on( "drag", function( event ) {
+				Canvas.redraw();
+
+			} );
 			$(ui2).dblclick(function(event){
 				if(event.target.childNodes[0] == null){
 							event.target = event.target.parentNode;
@@ -87,14 +91,30 @@ Canvas.initialize = function(){
 						var startX = iRect.left - canX + 64;
 						var endY = destRect.top - canY + 64;
 						var endX = destRect.left - canX + 64;
+						var midY = (startY + endY)/2;
+						var midX = (startX + endX)/2;
 						
-						
-						
+						var leftHeadX = midX - 10;
+						var leftHeadY = midY - 10; 
+						var rightHeadX = midX + 10;
+						var rightHeadY = midY - 10; 
+ 
+
 						var c = document.getElementById("draw");
 						var ctx = c.getContext("2d");
 						ctx.moveTo(startX,startY);
 						ctx.lineTo(endX, endY);
 						ctx.stroke();
+
+						ctx.moveTo(midX,midY);
+						ctx.lineTo(leftHeadX, leftHeadY);
+						ctx.stroke();
+
+						ctx.moveTo(midX,midY);
+						ctx.lineTo(rightHeadX, rightHeadY);
+						ctx.stroke();
+
+
 					}
 					else{
 						Canvas.firstClick = true;
@@ -177,12 +197,53 @@ Canvas.redraw = function(){
 					var startX = iRect.left - canX + 64;
 					var endY = destRect.top - canY + 64;
 					var endX = destRect.left - canX + 64;
+					var midY = (startY + endY)/2;
+						var midX = (startX + endX)/2;
 					
 					var c = document.getElementById("draw");
 					var ctx = c.getContext("2d");
 					ctx.moveTo(startX,startY);
 					ctx.lineTo(endX, endY);
 					ctx.stroke();
+
+					var vect2X = endX - midX;
+					var vect2Y = endY - midY;
+
+					var vect1X = 0;
+					var vect1Y = 1;
+					var tan  = Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY)) / (endX - startX);
+					//var radians = Math.atan(tan) + Math.PI/2;
+					var radians = Math.atan2(endX-startX, endY - startY);
+					var degrees = radians * 180 / Math.PI 
+						console.log(degrees)
+
+					/*	var leftHeadX = (midX - 10)*Math.cos(radians) - (midY-10) * Math.sin(radians) ;
+
+						var leftHeadY = (midY - 10)*Math.cos(radians) + (midX-10) * Math.sin(radians) ;
+						var rightHeadX = (midX + 10)*Math.cos(radians) - (midY-10) * Math.sin(radians) ;
+
+						var rightHeadY = (midY - 10)*Math.cos(radians) + (midX + 10) * Math.sin(radians) ;*/
+	var leftHeadX = midX-10;
+var leftHeadY = midY-10;
+var rightHeadX = midX + 10
+var rightHeadY = midY-10;
+
+					ctx.translate(midX, midY);
+					ctx.rotate(-radians); 
+					ctx.moveTo(0,0);
+					ctx.lineTo(-10, -10);
+					ctx.stroke();
+ctx.moveTo(0,0);
+					ctx.lineTo(10, -10);
+					ctx.stroke()
+					ctx.translate(-midX, -midY);
+
+
+/*
+						ctx.moveTo(midX,midY);
+
+						ctx.lineTo(rightHeadX, rightHeadY);
+						ctx.stroke();*/
 			}
 		}
 	
