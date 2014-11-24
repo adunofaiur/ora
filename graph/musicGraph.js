@@ -23,34 +23,16 @@ Graph.currentNode;
 Graph.initialize = function(){
 	
 }
-Graph.play = function(musicId){
-	Graph.currentNode = Graph.nodeById(musicId);
 
-	var control = document.getElementById("mainControl");
-	while(control.childNodes.length>0){
-		control.removeChild(control.firstChild);
-	}
-	var source = document.createElement("source");
-	source.setAttribute("src", Database.values.get(musicId).pathToFile);
-	source.setAttribute("type", "audio/mpeg");
-	control.appendChild(source);
-	control.addEventListener('ended', function(event){
-		if(Graph.currentNode.outEdges.length > 0){
-			var nextSong = Graph.getNextSong(Graph.currentNode.uid);
-			Graph.play(nextSong.uid);
-		}
-	
-		
-		});
-	
-}
 
 
 Graph.play = function(id){
 	Graph.currentNode = Graph.nodeById(id);
 	var control = document.getElementById("mainControl");
 	var source = document.createElement("source");
-	
+	var mDiv = document.getElementById("canvas" + Graph.currentNode.uid.toString());
+	mDiv.classList.remove("canvasMusic");
+	mDiv.classList.add("canvasMusicPlaying");
 	while(control.childNodes.length>0){
 		control.removeChild(control.firstChild);
 	}
@@ -62,11 +44,17 @@ Graph.play = function(id){
 		nextSongCheck = true;
 		var nextSong = Graph.getNextSong(Graph.currentNode.uid);
 		control.addEventListener('ended', function(event){
+		var musicDiv = document.getElementById("canvas" + Graph.currentNode.uid.toString());
+		musicDiv.classList.remove("canvasMusicPlaying");
+		musicDiv.classList.add("canvasMusic");
 		Graph.play(nextSong.uid);
 	});
 	}
 	else{
 		control.addEventListener('ended', function(event){
+		var musicDiv = document.getElementById("canvas" + Graph.currentNode.uid.toString());
+		musicDiv.classList.remove("canvasMusicPlaying");
+		musicDiv.classList.add("canvasMusic");
 		event.target.pause();
 	});
 	}

@@ -115,6 +115,41 @@ Canvas.initialize = function(){
 						ctx.stroke();
 
 
+						var vect2X = endX - midX;
+					var vect2Y = endY - midY;
+
+					var vect1X = 0;
+					var vect1Y = 1;
+					var tan  = Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY)) / (endX - startX);
+					//var radians = Math.atan(tan) + Math.PI/2;
+					var radians = Math.atan2(endX-startX, endY - startY);
+					var degrees = radians * 180 / Math.PI 
+						console.log(degrees)
+
+					/*	var leftHeadX = (midX - 10)*Math.cos(radians) - (midY-10) * Math.sin(radians) ;
+
+						var leftHeadY = (midY - 10)*Math.cos(radians) + (midX-10) * Math.sin(radians) ;
+						var rightHeadX = (midX + 10)*Math.cos(radians) - (midY-10) * Math.sin(radians) ;
+
+						var rightHeadY = (midY - 10)*Math.cos(radians) + (midX + 10) * Math.sin(radians) ;*/
+	var leftHeadX = midX-10;
+var leftHeadY = midY-10;
+var rightHeadX = midX + 10
+var rightHeadY = midY-10;
+					ctx.save();
+
+					ctx.translate(midX, midY);
+					ctx.rotate(-radians); 
+					ctx.moveTo(0,0);
+					ctx.lineTo(-10, -10);
+					ctx.stroke();
+ctx.moveTo(0,0);
+					ctx.lineTo(10, -10);
+					ctx.stroke()
+					ctx.translate(-midX, -midY);
+					ctx.restore();
+
+
 					}
 					else{
 						Canvas.firstClick = true;
@@ -186,6 +221,7 @@ Canvas.redraw = function(){
 		for(var i = 0; i < Graph.nodes.length; i++){
 			for(var j = 0; j < Graph.nodes[i].outEdges.length; j++){
 				//draw connection line
+					
 					var iRect = Graph.nodes[i].htmlElement.getBoundingClientRect();
 					var destRect =  Graph.nodes[i].outEdges[j].htmlElement.getBoundingClientRect();
 					var mCanvasRect = Canvas.htmlNode.getBoundingClientRect();
@@ -202,6 +238,8 @@ Canvas.redraw = function(){
 					
 					var c = document.getElementById("draw");
 					var ctx = c.getContext("2d");
+					
+					ctx.lineWidth = 3;
 					ctx.moveTo(startX,startY);
 					ctx.lineTo(endX, endY);
 					ctx.stroke();
@@ -227,6 +265,7 @@ Canvas.redraw = function(){
 var leftHeadY = midY-10;
 var rightHeadX = midX + 10
 var rightHeadY = midY-10;
+					ctx.save();
 
 					ctx.translate(midX, midY);
 					ctx.rotate(-radians); 
@@ -237,7 +276,7 @@ ctx.moveTo(0,0);
 					ctx.lineTo(10, -10);
 					ctx.stroke()
 					ctx.translate(-midX, -midY);
-
+					ctx.restore();
 
 /*
 						ctx.moveTo(midX,midY);
@@ -250,5 +289,7 @@ ctx.moveTo(0,0);
 }
 
 Canvas.playMe = function(id){
+
+
 	Graph.play(id);
 }
