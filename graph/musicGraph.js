@@ -11,21 +11,58 @@ function Node(uid, xPosition, yPosition, html2323){
 	this.xPosition = xPosition;
 	this.yPosition = yPosition;
 	this.inEdges = [];
+	this.outEdgeFunc = [];
 	this.outEdges = [];
 	this.htmlElement = html2323;
 }
-
+function Edge(inNode, outNode, edgeFunc){
+	this.inNode = inNode;
+	this.outNode = outNode;
+	this.edgeFunc = edgeFunc;
+	this.sadPref = "sometimes";
+	this.happyPref = "sometimes";
+	this.partyPref = "sometimes";
+	this.metalPref = "sometimes";
+}
 
 var Graph = {};
 Graph.nodes = [];
+Graph.edges = [];
 Graph.currentNode;
 Graph.mood;
-
+Graph.nextIndex;
+Graph.isNext = false;
 Graph.initialize = function(){
 	
 }
 
+Graph.defaultPlayFunct = function(mood){
+	return "sometimes";
+}
+Graph.nextButtonToggle = function(){
+	if(Graph.isNext){
+		var next = document.getElementById("nextI");
+		next.classList.remove("nextImgNan")
+		next.classList.add("nextImg");
+	}else{
+var next = document.getElementById("nextI");
+		next.classList.remove("nextImg")
+		next.classList.add("nextImgNan");
+	}
+}
 
+Graph.keepPlaying = function(event){
+	var musicDiv = document.getElementById("canvas" + Graph.currentNode.uid.toString());
+	musicDiv.classList.remove("canvasMusicPlaying");
+	musicDiv.classList.add("canvasMusic");
+	Graph.play(Graph.currentNode.outEdges[Graph.nextIndex].outNode.uid);
+}
+Graph.stopPlaying = function(event){
+var musicDiv = document.getElementById("canvas" + Graph.currentNode.uid.toString());
+		musicDiv.classList.remove("canvasMusicPlaying");
+		musicDiv.classList.add("canvasMusic");
+		event.target.pause();
+}
 
 Graph.play = function(id){
 	Graph.currentNode = Graph.nodeById(id);
@@ -43,22 +80,29 @@ Graph.play = function(id){
 	var nextSongCheck;
 	if(Graph.currentNode.outEdges.length > 0){
 		nextSongCheck = true;
-		var nextSong = Graph.getNextSong(Graph.currentNode.uid);
-		control.addEventListener('ended', function(event){
-		var musicDiv = document.getElementById("canvas" + Graph.currentNode.uid.toString());
-		musicDiv.classList.remove("canvasMusicPlaying");
-		musicDiv.classList.add("canvasMusic");
-		Graph.play(nextSong.uid);
-	});
+		Graph.nextIndex = Graph.getNextSong(Graph.currentNode.uid);
+		if(Graph.nextIndex >= 0){
+			control.removeEventListener("ended", Graph.keepPlaying);
+			control.removeEventListener("ended", Graph.stopPlaying);
+			control.addEventListener('ended', Graph.keepPlaying);
+			Graph.isNext = true;
+		}
+		else{
+			control.removeEventListener("ended", Graph.keepPlaying);
+			control.removeEventListener("ended", Graph.stopPlaying);
+			control.addEventListener('ended', Graph.stopPlaying);
+						Graph.isNext = false;
+
+	}
 	}
 	else{
-		control.addEventListener('ended', function(event){
-		var musicDiv = document.getElementById("canvas" + Graph.currentNode.uid.toString());
-		musicDiv.classList.remove("canvasMusicPlaying");
-		musicDiv.classList.add("canvasMusic");
-		event.target.pause();
-	});
+	control.removeEventListener("ended", Graph.keepPlaying);
+			control.removeEventListener("ended", Graph.stopPlaying);
+	control.addEventListener('ended', Graph.stopPlaying);
+				Graph.isNext = false;
+
 	}
+	Graph.nextButtonToggle();
 		control.load();
 		control.play();
 
@@ -69,6 +113,13 @@ Graph.nodeById = function(id){
 	for (var i = 0; i < this.nodes.length; i++){
 		if(this.nodes[i].uid == id){
 			return this.nodes[i];
+		}
+	}
+}
+Graph.edgeByIds = function(startId, endId){
+	for (var i = 0; i < Graph.edges.length; i++){
+		if(Graph.edges[i].inNode.uid == startId && Graph.edges[i].outNode.uid == endId){
+			return this.edges[i];
 		}
 	}
 }
@@ -100,8 +151,10 @@ Graph.addEdge = function(startUid, endUid) {
 	
 	if(startNode != null & endNode != null)
 	{
-		startNode.outEdges.push(endNode);
-		endNode.inEdges.push(startNode);
+		var edge = new Edge(startNode, endNode, Graph.defaultPlayFunct);
+		startNode.outEdges.push(edge);
+		endNode.inEdges.push(edge);
+		Graph.edges.push(edge);
 	}		
 }
 
@@ -126,7 +179,7 @@ Graph.removeEdge = function(startUid, endUid) {
 		var startNodeLength = startNode.outEdges.length;
 		for(var i = 0; i < startNodeLength; i++)
 		{
-			if(startNode.outEdges[i] == endUid)
+			if(startNode.outEdges[i].outNode.uid == endUid)
 			{
 				startNode.outEdges.splice(i,1);
 				i = startNodeLength;
@@ -136,7 +189,7 @@ Graph.removeEdge = function(startUid, endUid) {
 		var endNodeLength = endNode.inEdges.length;
 		for(var i = 0; i < endNodeLength; i++)
 		{
-			if(endNode.inEdges[i] == startUid)
+			if(endNode.inEdges[i].outNode.uid == startUid)
 			{
 				endNode.inEdges.splice(i,1);
 				i = endNodeLength;
@@ -147,8 +200,49 @@ Graph.removeEdge = function(startUid, endUid) {
 
 Graph.getNextSong = function(id){
 	var possibleNodes = Graph.nodeById(id).outEdges;
-	
-	var index = Math.floor((Math.random() * possibleNodes.length));
-	return possibleNodes[index];
+	var responses = [];
 
+
+	for(var i = 0; i < possibleNodes.length; i++){
+		if(Graph.mood == 'sad'){
+		responses.push(possibleNodes[i].sadPref);
+
+		}else if (Graph.mood == 'happy'){
+		responses.push(possibleNodes[i].happyPref);
+
+		}
+		else if (Graph.mood == 'party'){
+		responses.push(possibleNodes[i].partyPref);
+
+		}
+		else if (Graph.mood == 'metal'){
+		responses.push(possibleNodes[i].metalPref);
+
+		}
+		else{
+			responses.push("sometimes");
+		}
+	}
+	var anyPossible = false;
+	for(var i = 0; i < responses.length; i++){
+		if(responses[i] == 'always'){
+			return i;
+		}else if (responses[i] == 'sometimes'){
+			anyPossible = true;
+		}
+	}
+	if(anyPossible){
+		while(true){
+			var index = Math.floor((Math.random() * responses.length));
+			if (responses[index] != 'never'){
+				return index;
+			}
+		}		
+	}
+
+	//return possibleNodes[index];
+
+
+	//mood and was skipped will be out two criteria
+return -1;
 }

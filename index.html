@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>CSCE Template</title>
+<title>CSCE 436: Organic Rich Curated Audio - Music++ - ORA</title>
 <link href="ora.css" rel="stylesheet" type="text/css"></link>
 
 <script type="text/javascript" src="./canvas/canvas.js"></script>
@@ -13,6 +13,7 @@
 <script type="text/javascript" src="./database/database.js"></script>
 
 <script type="text/javascript" src="./graph/musicGraph.js"></script>
+<script type="text/javascript" src="kin.js"></script>
 
  <link rel="stylesheet" href="jqueryUI/jquery-ui.css">
   <script src="jquery-2.1.1.min.js"></script>
@@ -55,25 +56,78 @@ function callback(){
 
 </script>
 
-<div id="jukeBox">
-	
+<div id="edgeDialog" title="Edit Edge Properties">
+
+
+
 </div>
-<div id="musicCanvas">
-<canvas id="draw" width="790px" height="630px"></canvas>
- </div>
- <div id="moods" class="moodBox">
- 	<div class="mood" id="sad"></div>
- 	 <div class="mood" id="happy"></div>
 
- 	<div class="mood" id="biege"></div>
 
- 	<div class="mood" id="spicy"></div>
-
- </div>
+<div class="playback">
+<span class="supertitle">
+O.R.C.A.
+</span> 
+<span class="sexy">
 
  <audio controls id="mainControl">
 Your browser does not support the audio element.
 </audio>
+<span id="next" class="nextCont">
+ 		<img src="next.png" class="nextImgNan" id="nextI">
+
+</span>
+</span>
+
+
+
+<span id="moods" class="moodBox">
+ 	<div class="mood" id="sad" title="sad">
+ 		<img src="sad_image.jpg" class="moodImg">
+		<p class="moodTxt1">sad
+
+ 	</div>
+ 	 <div class="mood" id="happy">
+ 		
+			<img src="happy_image.jpg" class="moodImg">
+		<p class="moodTxt2">happy
+
+ 	 </div>
+ 	<div class="mood" id="party">
+ 		
+			<img src="party_image.jpg" class="moodImg">
+		<p class="moodTxt3">party
+
+ 	</div>
+ 	<div class="mood" id="metal">
+ 		
+			<img src="metal_image.jpg" class="moodImg">
+		<p class="moodTxt4">metal
+
+ 	</div>
+ </span>
+</div>
+<div class="content">
+
+
+
+<div id="jukeBox">
+	<div id="filter" class="jbFilts">
+		<select s>
+  			<option value="none">All Genres</option>
+  			<option value="pop">Pop</option>
+  			<option value="jazz">Jazz</option>
+  			<option value="country">Country</option>
+  			<option value="classical">Classical</option>
+
+		</select>
+	</div>
+</div>
+<div id="musicCanvas">
+<canvas id="draw" width="1100px" height="740px"></canvas>
+ </div>
+ 
+</div>
+
  <script>
 
 	Database.initialize();

@@ -155,25 +155,55 @@ Map.prototype.value = function() {
  
  
 
-function Music(songName, pathToFile, pathToArtwork){
-	this.songName = songName;
-	this.pathToFile = pathToFile;
-	this.pathToArtwork = pathToArtwork;
-	
+function Music(songName, pathToFile, pathToArtwork, genre){
+    this.songName = songName;
+    this.pathToFile = pathToFile;
+    this.genre = genre;
+    this.pathToArtwork = pathToArtwork;
+    
 } 
 var Database = {};
 Database.values = new Map();
 Database.initialize = function(){
-	
-	var Color_Kings = new Music("Color_Kings","database/Color_Kings.mp3","database/album3.jpg");
-	var Kirk_Pearson = new Music("Kirk_Pearson","database/Kirk_Pearson.mp3","database/album4.jpg");
-	var These_Guy = new Music("These_Guy","database/These_Guy.mp3","database/album5.jpg");
-	
-	Database.values.put("test1", Color_Kings);
-	Database.values.put("test2", Kirk_Pearson);
-	Database.values.put("test3", These_Guy);
-	JukeBox.initialize();
-	
+    
+    
+    var m1 = new Music("Firework","music/pop/Firework.mp3","music/pop/Firework.jpg" ,"pop");
+    var m2 = new Music("Starships","music/pop/Starships.mp3","music/pop/Starships.jpg","pop");
+    var m3 = new Music("Applause","music/pop/Applause.mp3","music/pop/Applause.jpg","pop");
+    var m4 = new Music("Blank Space","music/pop/Blank Space.mp3","music/pop/Blank Space.jpg","pop");
+    Database.values.put(generateUUID(), m1);
+    Database.values.put(generateUUID(), m2);
+    Database.values.put(generateUUID(), m3);
+    Database.values.put(generateUUID(), m4);
+    
+    var m5 = new Music("Ev'ry Time We Say Goodbye","music/jazz/Ev'ry Time We Say Goodbye.mp3","music/jazz/Ev'ry Time We Say Goodbye.jpg","jazz");
+    var m6 = new Music("I Won't Dance","music/jazz/I Won't Dance.mp3","music/jazz/I Won't Dance.jpg","jazz");
+    var m7 = new Music("The Lady Is a Tramp (1956 Version)","music/jazz/The Lady Is a Tramp (1956 Version).mp3","music/jazz/The Lady Is a Tramp (1956 Version).jpg","jazz");
+    var m8 = new Music("Anything Goes","music/jazz/Anything Goes.mp3","music/jazz/Anything Goes.jpg","jazz");
+    Database.values.put(generateUUID(), m5);
+    Database.values.put(generateUUID(), m6);
+    Database.values.put(generateUUID(), m7);
+    Database.values.put(generateUUID(), m8);
+    
+    var m9 = new Music("Kerosene","music/country/Kerosene.mp3","music/country/Kerosene.jpg","country");
+    var m10 = new Music("Ticks","music/country/Ticks.mp3","music/country/Ticks.jpg","country");
+    var m11 = new Music("What About Georgia","music/country/What About Georgia.mp3","music/country/What About Georgia.jpg","country");
+    var m12 = new Music("Favorite State of Mind","music/country/Favorite State of Mind.mp3","music/country/Favorite State of Mind.jpg","country");
+    Database.values.put(generateUUID(), m9);
+    Database.values.put(generateUUID(), m10);
+    Database.values.put(generateUUID(), m11);
+    Database.values.put(generateUUID(), m12);
+    
+    var m13 = new Music("Czardas","music/classical/Czardas.mp3","music/classical/Czardas.jpg","classical");
+    var m14= new Music("Main Theme","music/classical/Main Theme.mp3","music/classical/Main Theme.jpg","classical");
+    var m15 = new Music("One-Winged Angel","music/classical/One-Winged Angel.mp3","music/classical/One-Winged Angel.jpg","classical");
+    var m16 = new Music("Terra_S Theme (Final Fantasy VI)","music/classical/Terra_S Theme (Final Fantasy VI).mp3","music/classical/Terra_S Theme (Final Fantasy VI).jpg","classical");
+    Database.values.put(generateUUID(), m13);
+    Database.values.put(generateUUID(), m14);
+    Database.values.put(generateUUID(), m15);
+    Database.values.put(generateUUID(), m16);
+    JukeBox.initialize();
+    
 }
 function generateUUID(){
     var d = new Date().getTime();

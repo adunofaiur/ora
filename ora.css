@@ -9,12 +9,16 @@
 #jukeBox {
 	 width: 200px;
 	 height:643px; 
-	 border:2px solid #ccc; 
-	 padding: 10px; 
+	 border:3px solid #ccc; 
 	 display: inline-block; 
 	 float: left;
  }
 audio{
 	display: block;
 	padding-left: 4px;
+}
+body{
+	    overflow: scroll;
+width: 1400;
+background-image: url(linen_bg_tile.jpg);
 }
