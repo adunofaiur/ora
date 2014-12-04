@@ -19,6 +19,8 @@ audio{
 }
 body{
 	    overflow: scroll;
-min-width: 1400px;
+min-width: 1440px;
+min-height: 900px;
+
 background-image: url(linen_bg_tile.jpg);
 }
